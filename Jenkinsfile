@@ -12,6 +12,12 @@ pipeline {
         sh "ls -lRrth"
       }
     }
+    stage('Workspace') {
+      steps {
+        echo "testing..."
+        sh "ls -lRthr ${WORKSPACE}"
+      }
+    }
     stage('Deploy') {
       parallel {
         stage('Deploy start ') {

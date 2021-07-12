@@ -15,7 +15,7 @@ pipeline {
     stage('Workspace') {
       steps {
         echo "testing..."
-        sh "ls -lRthr ${WORKSPACE}"
+        sh "ls -lRthr '${WORKSPACE}'"
       }
     }
     stage('Deploy') {

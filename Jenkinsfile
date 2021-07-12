@@ -1,4 +1,8 @@
 pipeline {
+  environment {
+    bakdir = '~/backup/test-workspace'
+  }
+
   agent any
   stages {
     stage('Build') {
@@ -12,7 +16,7 @@ pipeline {
         sh "ls -lRrth"
       }
     }
-    stage('Workspace') {
+    stage('Workspace Check') {
       steps {
         echo "testing..."
         sh "ls -lRthr '${WORKSPACE}'"
@@ -36,6 +40,13 @@ pipeline {
     stage('Prod') {
       steps {
         echo "App is Prod Ready"
+      }
+    }
+    stage('Backup Workspace') {
+      steps {
+        echo "testing..."
+        sh "mkdir -p ${bakdir}"
+        sh "cp -rf '${WORKSPACE}' ${bakdir}/."
       }
     }
   }
